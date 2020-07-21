@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1036103887512",
+    "firebase_url": "https://truescreens-b3331.firebaseio.com",
+    "project_id": "truescreens-b3331",
+    "storage_bucket": "truescreens-b3331.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036103887512:android:0f9eafb3fd7c24775c7eed",
+        "android_client_info": {
+          "package_name": "com.JeevanCrasta.truepicks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036103887512-viko2cjg2ms0c1d6ne8mhfu003g3o5en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjq9rMi3Xq7Ho21ZrbvYhClQcwyOxd8fE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036103887512-viko2cjg2ms0c1d6ne8mhfu003g3o5en.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036103887512:android:aee282855feb94515c7eed",
+        "android_client_info": {
+          "package_name": "com.example.truepicks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036103887512-viko2cjg2ms0c1d6ne8mhfu003g3o5en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjq9rMi3Xq7Ho21ZrbvYhClQcwyOxd8fE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036103887512-viko2cjg2ms0c1d6ne8mhfu003g3o5en.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
