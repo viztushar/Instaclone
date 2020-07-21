@@ -49,17 +49,10 @@ class _SignDemoState extends State<SignDemo> {
     prefs = await SharedPreferences.getInstance();
 
     isLoggedIn = await _googleSignIn.isSignedIn();
-    if (isLoggedIn) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => HomePage(
-                    userName: currentUser.displayName,
-                  )));
-    }
 
     this.setState(() {
       isLoading = false;
+      isLoggedIn = isLoggedIn;
     });
   }
 
@@ -110,9 +103,8 @@ class _SignDemoState extends State<SignDemo> {
       Fluttertoast.showToast(msg: "Sign in success");
       this.setState(() {
         isLoading = false;
+        isLoggedIn = true;
       });
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
     } else {
       Fluttertoast.showToast(msg: "Sign in fail");
       this.setState(() {
@@ -124,7 +116,7 @@ class _SignDemoState extends State<SignDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoggedIn == false ? Scaffold(
       body: Stack(
         children: <Widget>[
           Center(
@@ -150,6 +142,6 @@ class _SignDemoState extends State<SignDemo> {
           ),
         ],
       ),
-    );
+    ) : HomePage();
   }
 }
