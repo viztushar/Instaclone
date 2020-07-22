@@ -34,6 +34,7 @@ class _SignDemoState extends State<SignDemo> {
   bool isLoading = false;
   bool isLoggedIn = false;
   FirebaseUser currentUser;
+  String userName = "";
 
   @override
   void initState() {
@@ -49,17 +50,10 @@ class _SignDemoState extends State<SignDemo> {
     prefs = await SharedPreferences.getInstance();
 
     isLoggedIn = await _googleSignIn.isSignedIn();
-    if (isLoggedIn) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => HomePage(
-                    userName: currentUser.displayName,
-                  )));
-    }
 
     this.setState(() {
       isLoading = false;
+      isLoggedIn = isLoggedIn;
     });
   }
 
@@ -84,6 +78,7 @@ class _SignDemoState extends State<SignDemo> {
           .where('id', isEqualTo: firebaseUser.uid)
           .getDocuments();
       final List<DocumentSnapshot> documents = result.documents;
+      print(firebaseUser.uid);
       if (documents.length == 0) {
         // Update data to server if new user
         Firestore.instance
@@ -106,13 +101,14 @@ class _SignDemoState extends State<SignDemo> {
         await prefs.setString('id', documents[0]['id']);
         await prefs.setString('nickname', documents[0]['nickname']);
         await prefs.setString('photoUrl', documents[0]['photoUrl']);
+        
       }
+
       Fluttertoast.showToast(msg: "Sign in success");
       this.setState(() {
         isLoading = false;
+        isLoggedIn = true;
       });
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
     } else {
       Fluttertoast.showToast(msg: "Sign in fail");
       this.setState(() {
@@ -124,11 +120,12 @@ class _SignDemoState extends State<SignDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoggedIn == false ? Scaffold(
       body: Stack(
         children: <Widget>[
           Center(
             child: RaisedButton(
+              child: Text("SignIn"),
               onPressed: () {
                 _handleSignIn();
               },
@@ -150,6 +147,6 @@ class _SignDemoState extends State<SignDemo> {
           ),
         ],
       ),
-    );
+    ) : HomePage();
   }
 }

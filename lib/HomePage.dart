@@ -5,18 +5,21 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'main.dart';
 
 class HomePage extends StatefulWidget {
-  String userName;
-  HomePage({this.userName});
+  HomePage();
   @override
-  _HomePageState createState() => _HomePageState(userName);
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  String userName;
-  _HomePageState(this.userName);
-
   final GoogleSignIn googleSignIn = GoogleSignIn();
   bool isLoading = false;
+  FirebaseUser currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
 
   Future<Null> handleSignOut() async {
     this.setState(() {
@@ -46,7 +49,9 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: <Widget>[
-            Text(googleSignIn.currentUser.displayName),
+            Text(currentUser.displayName),
+            Text(currentUser.email),
+            Image.network(currentUser.photoUrl),
             FlatButton(
               onPressed: handleSignOut,
               child: Text(
@@ -61,5 +66,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     ));
+  }
+
+  Future<void> getUser() async {
+    currentUser = await FirebaseAuth.instance.currentUser();
   }
 }
